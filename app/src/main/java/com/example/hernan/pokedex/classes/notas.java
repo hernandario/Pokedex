@@ -16,5 +16,5 @@ public class notas {
     public int usuario_id;
     public int species_id;
     public String texto;
-    
+
 }
