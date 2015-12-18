@@ -64,6 +64,21 @@ public class pokemon_pokedexDAO {
 
     }
 
+    public int insert(int pokedex_id, int species_id){
+
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(pokemon_pokedex.KEY_pokedex_id, pokedex_id);
+        values.put(pokemon_pokedex.KEY_species_id, species_id);
+        values.put(pokemon_pokedex.KEY_visto, true);
+        values.put(pokemon_pokedex.KEY_capturado, false);
+
+        long pp_id = db.insert(pokemon_pokedex.TABLE, null, values);
+        db.close();
+        return (int) pp_id;
+
+    }
+
 
 
 
