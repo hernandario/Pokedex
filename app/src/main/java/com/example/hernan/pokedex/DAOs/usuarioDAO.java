@@ -69,4 +69,18 @@ public class usuarioDAO {
         return u;
 
     }
+
+    public void updateLanguage(usuario u){
+
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(usuario.KEY_id, u.id);
+        values.put(usuario.KEY_nombre, u.nombre);
+        values.put(usuario.KEY_mail, u.mail);
+        values.put(usuario.KEY_local_language_id, u.local_language_id);
+
+        db.update(usuario.TABLE, values, usuario.KEY_id + " = ?", new String[] {String.valueOf(u.id)});
+
+    }
 }
