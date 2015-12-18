@@ -27,8 +27,9 @@ public class pokemon_pokedexDAO {
 
         values.put(pokemon_pokedex.KEY_visto, true);
 
-        db.update(pokemon_pokedex.TABLE, values, pokemon_pokedex.KEY_pokedex_id + " = ?" + " AND " + pokemon_pokedex.KEY_species_id + " = ?",
-                new String[]{String.valueOf(pp.pokedex_id), String.valueOf(pp.species_id)});
+        db.update(pokemon_pokedex.TABLE, values, pokemon_pokedex.KEY_pokedex_id + " = ?"
+                        + " AND " + pokemon_pokedex.KEY_species_id + " = ?",
+                         new String[]{String.valueOf(pp.pokedex_id), String.valueOf(pp.species_id)});
 
         db.close();
 
@@ -41,8 +42,9 @@ public class pokemon_pokedexDAO {
 
         values.put(pokemon_pokedex.KEY_capturado, true);
 
-        db.update(pokemon_pokedex.TABLE, values, pokemon_pokedex.KEY_pokedex_id + " = ?" + " AND " + pokemon_pokedex.KEY_species_id + " = ?",
-                new String[]{String.valueOf(pp.pokedex_id), String.valueOf(pp.species_id)});
+        db.update(pokemon_pokedex.TABLE, values, pokemon_pokedex.KEY_pokedex_id + " = ?"
+                        + " AND " + pokemon_pokedex.KEY_species_id + " = ?",
+                         new String[]{String.valueOf(pp.pokedex_id), String.valueOf(pp.species_id)});
 
         db.close();
 
@@ -61,6 +63,8 @@ public class pokemon_pokedexDAO {
         db.close();
 
     }
+
+
 
 
 }
