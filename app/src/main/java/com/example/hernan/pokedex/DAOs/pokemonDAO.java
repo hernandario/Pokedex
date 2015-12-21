@@ -39,6 +39,7 @@ public class pokemonDAO {
 
         if(cursor.moveToFirst()){
             do{
+
                 poke.id = cursor.getInt(cursor.getColumnIndex(pokemon.KEY_id));
                 poke.identifier = cursor.getString(cursor.getColumnIndex(pokemon.KEY_identifier));
                 poke.species_id = cursor.getInt(cursor.getColumnIndex(pokemon.KEY_species_id));
@@ -46,6 +47,7 @@ public class pokemonDAO {
                 poke.weight = cursor.getInt(cursor.getColumnIndex(pokemon.KEY_weight));
                 poke.base_experience = cursor.getInt(cursor.getColumnIndex(pokemon.KEY_base_experience));
                 poke.order = cursor.getInt(cursor.getColumnIndex(pokemon.KEY_order));
+
             } while(cursor.moveToNext());
         }
 

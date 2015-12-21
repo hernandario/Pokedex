@@ -33,7 +33,7 @@ public class pokemon_species {
     public int evolves_from_species_id;
     public int evolution_chain_id;
     public int color_id;
-    public int dhape_id;
+    public int shape_id;
     public int habitat_id;
     public int gender_rate;
     public int capture_rate;
@@ -44,4 +44,5 @@ public class pokemon_species {
     public int growth_rate_id;
     public boolean forms_switchable;
     public int order;
+    public int conquest_order;
 }
