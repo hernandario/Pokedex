@@ -66,77 +66,120 @@ public class DBHelper extends SQLiteOpenHelper {
 
         String GENERATIONS = "CREATE TABLE "
                 + generations.TABLE + "("
+                + generations.KEY_id + "INTEGER, "
+                + generations.KEY_main_region_id + "INTEGER, "
+                + generations.KEY_identifier + "VARCHAR"
                 +")";
+
+        execute_create(db, GENERATIONS);
 
         String LANGAGUE = "CREATE TABLE "
                 + languages.TABLE + "("
+                + languages.KEY_id + "INTEGER, "
+                + languages.KEY_iso639 + "VARCHAR, "
+                + languages.KEY_iso3166 + "VARCHAR, "
+                + languages.KEY_identifier + "VARCHAR, "
+                + languages.KEY_official + "BOOLEAN, "
+                + languages.KEY_order + "INTEGER"
                 +")";
+
+        execute_create(db, LANGAGUE);
 
         String NOTAS = "CREATE TABLE "
                 + notas.TABLE + "("
                 +")";
 
+        execute_create(db, NOTAS);
+
         String POKEDEX = "CREATE TABLE "
                 + pokedex.TABLE + "("
                 +")";
+
+        execute_create(db, POKEDEX);
 
         String POKEMON_COLORS = "CREATE TABLE "
                 + pokemon_colors.TABLE + "("
                 +")";
 
+        execute_create(db, POKEMON_COLORS);
+
         String POKEMON_POKEDEX = "CREATE TABLE "
                 + pokemon_pokedex.TABLE + "("
                 +")";
+
+        execute_create(db, POKEMON_POKEDEX);
 
         String POKEMON_SPECIES_FLAVOR_TEXT = "CREATE TABLE "
                 + pokemon_species_flavor_text.TABLE + "("
                 +")";
 
+        execute_create(db, POKEMON_SPECIES_FLAVOR_TEXT);
+
         String POKEMON_SPECIES_NAMES = "CREATE TABLE "
                 + pokemon_species_names.TABLE + "("
                 +")";
+
+        execute_create(db, POKEMON_SPECIES_NAMES);
 
         String POKEMON_SPECIES = "CREATE TABLE "
                 + pokemon_species.TABLE + "("
                 +")";
 
+        execute_create(db, POKEMON_SPECIES);
+
         String POKEMON = "CREATE TABLE "
                 + pokemon.TABLE + "("
                 +")";
+
+        execute_create(db, POKEMON);
 
         String REGIONS = "CREATE TABLE "
                 + regions.TABLE + "("
                 +")";
 
+        execute_create(db, REGIONS);
+
         String TYPES_NAMES = "CREATE TABLE "
                 + types_names.TABLE + "("
                 +")";
+
+        execute_create(db, TYPES_NAMES);
 
         String TYPES = "CREATE TABLE "
                 + types.TABLE + "("
                 +")";
 
+        execute_create(db, TYPES);
+
         String USUARIO_POKEDEX = "CREATE TABLE "
                 + usuario_pokedex.TABLE + "("
                 +")";
+
+        execute_create(db, USUARIO_POKEDEX);
 
         String VERSION_GROUPS = "CREATE TABLE "
                 + version_groups.TABLE + "("
                 +")";
 
+        execute_create(db, VERSION_GROUPS);
+
         String VERSIONS = "CREATE TABLE "
                 + versions.TABLE + "("
                 +")";
+
+        execute_create(db, VERSIONS);
 
         String USUARIOS   = "CREATE TABLE "
                 + usuario.TABLE + "("
                 +")";
 
+        execute_create(db, USUARIOS);
+
     }
 
     public void execute_create(SQLiteDatabase db, String create_table){
 
-
+        db.execSQL(create_table);
 
     }
 }
