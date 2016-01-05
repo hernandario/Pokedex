@@ -24,10 +24,58 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
+        createTables();
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+    }
+
+    public void createTables(){
+
+
+        String EVOLUTION_CHAINS = "CREATE TABLE ";
+
+        String GENERATIONS;
+
+        String LANGAGUE;
+
+        String NOTAS;
+
+        String POKEDEX;
+
+        String POKEMON_COLORS;
+
+        String POKEMON_POKEDEX;
+
+        String POKEMON_SPECIES_FLAVOR_TEXT;
+
+        String POKEMON_SPECIES_NAMES;
+
+        String POKEMON_SPECIES;
+
+        String POKEMON;
+
+        String REGIONS;
+
+        String TYPES_NAMES;
+
+        String TYPES;
+
+        String USUARIO_POKEDEX;
+
+        String VERSION_GROUPS;
+
+        String VERSIONS;
+
+        String USUARIOS;
+
+
+
+
+
 
     }
 }
