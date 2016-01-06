@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Build;
 
 import com.example.hernan.pokedex.classes.evolution_chains;
 import com.example.hernan.pokedex.classes.generations;
@@ -30,7 +31,7 @@ import com.example.hernan.pokedex.classes.versions;
 public class DBHelper extends SQLiteOpenHelper {
 
 
-    private static final int DATABASE_VERSION = 0;
+    private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "pokedex.db";
 
     public DBHelper(Context context) {
@@ -44,6 +45,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         createTables(db);
+
+        insertOnTables(db);
 
     }
 
@@ -60,7 +63,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + evolution_chains.KEY_baby_trigger_item_id + "INTEGER"
                 +")";
 
-        execute_create(db, EVOLUTION_CHAINS);
+        db.execSQL(EVOLUTION_CHAINS);
 
 
         String GENERATIONS = "CREATE TABLE "
@@ -70,7 +73,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + generations.KEY_identifier + "VARCHAR(79)"
                 +")";
 
-        execute_create(db, GENERATIONS);
+        db.execSQL(GENERATIONS);
 
         String LANGAGUE = "CREATE TABLE "
                 + languages.TABLE + "("
@@ -82,7 +85,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + languages.KEY_order + "INTEGER"
                 +")";
 
-        execute_create(db, LANGAGUE);
+        db.execSQL(LANGAGUE);
 
         String NOTAS = "CREATE TABLE "
                 + notas.TABLE + "("
@@ -92,14 +95,14 @@ public class DBHelper extends SQLiteOpenHelper {
                 + notas.KEY_texto + "TEXT"
                 +")";
 
-        execute_create(db, NOTAS);
+        db.execSQL(NOTAS);
 
         String POKEDEX = "CREATE TABLE "
                 + pokedex.TABLE + "("
                 + pokedex.KEY_id + "INTEGER PRIMARY KEY AUTOINCREMENT, "
                 +")";
 
-        execute_create(db, POKEDEX);
+        db.execSQL(POKEDEX);
 
         String POKEMON_COLORS = "CREATE TABLE "
                 + pokemon_colors.TABLE + "("
@@ -107,7 +110,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + pokemon_colors.KEY_identifier + "VARCHAR(79)"
                 +")";
 
-        execute_create(db, POKEMON_COLORS);
+        db.execSQL(POKEMON_COLORS);
 
         String POKEMON_POKEDEX = "CREATE TABLE "
                 + pokemon_pokedex.TABLE + "("
@@ -118,7 +121,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
                 +")";
 
-        execute_create(db, POKEMON_POKEDEX);
+        db.execSQL(POKEMON_POKEDEX);
 
         String POKEMON_SPECIES_FLAVOR_TEXT = "CREATE TABLE "
                 + pokemon_species_flavor_text.TABLE + "("
@@ -128,7 +131,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + pokemon_species_flavor_text.KEY_flavor_text + "TEXT NOT NULL"
                 +")";
 
-        execute_create(db, POKEMON_SPECIES_FLAVOR_TEXT);
+        db.execSQL(POKEMON_SPECIES_FLAVOR_TEXT);
 
         String POKEMON_SPECIES_NAMES = "CREATE TABLE "
                 + pokemon_species_names.TABLE + "("
@@ -138,7 +141,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + pokemon_species_names.KEY_genus + "TEXT"
                 +")";
 
-        execute_create(db, POKEMON_SPECIES_NAMES);
+        db.execSQL(POKEMON_SPECIES_NAMES);
 
         String POKEMON_SPECIES = "CREATE TABLE "
                 + pokemon_species.TABLE + "("
@@ -162,7 +165,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + pokemon_species.KEY_conquest_order + "INTEGER"
                 +")";
 
-        execute_create(db, POKEMON_SPECIES);
+        db.execSQL(POKEMON_SPECIES);
 
         String POKEMON = "CREATE TABLE "
                 + pokemon.TABLE + "("
@@ -176,7 +179,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + pokemon.KEY_is_default + "BOOLEAN NOT NULL"
                 +")";
 
-        execute_create(db, POKEMON);
+        db.execSQL(POKEMON);
 
         String REGIONS = "CREATE TABLE "
                 + regions.TABLE + "("
@@ -184,7 +187,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + regions.KEY_identifier + "VARCHAR(79) NOT NULL, "
                 +")";
 
-        execute_create(db, REGIONS);
+        db.execSQL(REGIONS);
 
         String TYPES_NAMES = "CREATE TABLE "
                 + types_names.TABLE + "("
@@ -193,7 +196,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + types_names.KEY_name + "VARCHAR(79) NOT NULL"
                 +")";
 
-        execute_create(db, TYPES_NAMES);
+        db.execSQL(TYPES_NAMES);
 
         String TYPES = "CREATE TABLE "
                 + types.TABLE + "("
@@ -203,7 +206,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + types.KEY_damage_class_id + "INTEGER"
                 +")";
 
-        execute_create(db, TYPES);
+        db.execSQL(TYPES);
 
         String USUARIO_POKEDEX = "CREATE TABLE "
                 + usuario_pokedex.TABLE + "("
@@ -211,7 +214,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + usuario_pokedex.KEY_pokedex_id + "INTEGER NOT NULL"
                 +")";
 
-        execute_create(db, USUARIO_POKEDEX);
+        db.execSQL(USUARIO_POKEDEX);
 
         String VERSION_GROUPS = "CREATE TABLE "
                 + version_groups.TABLE + "("
@@ -221,7 +224,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + version_groups.KEY_order + "INTEGER"
                 +")";
 
-        execute_create(db, VERSION_GROUPS);
+        db.execSQL(VERSION_GROUPS);
 
         String VERSIONS = "CREATE TABLE "
                 + versions.TABLE + "("
@@ -230,7 +233,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + versions.KEY_identifier + "VARCHAR(79)"
                 +")";
 
-        execute_create(db, VERSIONS);
+        db.execSQL(VERSIONS);
 
         String USUARIOS   = "CREATE TABLE "
                 + usuario.TABLE + "("
@@ -240,13 +243,12 @@ public class DBHelper extends SQLiteOpenHelper {
                 + usuario.KEY_local_language_id + "INTEGER NOT NULL"
                 +")";
 
-        execute_create(db, USUARIOS);
+        db.execSQL(USUARIOS);
 
     }
 
-    public void execute_create(SQLiteDatabase db, String create_table){
-
-        db.execSQL(create_table);
+    public void insertOnTables(SQLiteDatabase db){
 
     }
+
 }
