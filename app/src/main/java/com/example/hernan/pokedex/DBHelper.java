@@ -86,12 +86,17 @@ public class DBHelper extends SQLiteOpenHelper {
 
         String NOTAS = "CREATE TABLE "
                 + notas.TABLE + "("
+                + notas.KEY_id + "INTEGER PRIMARY AUTOINCREMENT, "
+                + notas.KEY_usuario_id + "INTEGERNOT NULL, "
+                + notas.KEY_species_id + "INTEGER NOT NULL, "
+                + notas.KEY_texto + "TEXT"
                 +")";
 
         execute_create(db, NOTAS);
 
         String POKEDEX = "CREATE TABLE "
                 + pokedex.TABLE + "("
+                + pokedex.KEY_id + "INTEGER PRIMARY KEY AUTOINCREMENT, "
                 +")";
 
         execute_create(db, POKEDEX);
@@ -106,6 +111,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
         String POKEMON_POKEDEX = "CREATE TABLE "
                 + pokemon_pokedex.TABLE + "("
+                + pokemon_pokedex.KEY_species_id + "INTEGER NOT NULL, "
+                + pokemon_pokedex.KEY_pokedex_id + "INTEGER NOT NULL, "
+                + pokemon_pokedex.KEY_visto + "BOOLEAN NOT NULL, "
+                + pokemon_pokedex.KEY_capturado + "BOOLEAN "
+
                 +")";
 
         execute_create(db, POKEMON_POKEDEX);
@@ -197,6 +207,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
         String USUARIO_POKEDEX = "CREATE TABLE "
                 + usuario_pokedex.TABLE + "("
+                + usuario_pokedex.KEY_usuario_id + "INTEGER NOT NULL, "
+                + usuario_pokedex.KEY_pokedex_id + "INTEGER NOT NULL"
                 +")";
 
         execute_create(db, USUARIO_POKEDEX);
@@ -222,6 +234,10 @@ public class DBHelper extends SQLiteOpenHelper {
 
         String USUARIOS   = "CREATE TABLE "
                 + usuario.TABLE + "("
+                + usuario.KEY_id + "INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + usuario.KEY_nombre + "VARCHAR(79), "
+                + usuario.KEY_mail + "VARCHAR(79), "
+                + usuario.KEY_local_language_id + "INTEGER NOT NULL"
                 +")";
 
         execute_create(db, USUARIOS);
