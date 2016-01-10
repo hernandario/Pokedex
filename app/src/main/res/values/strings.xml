@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Pokedex</string>
+
+    <string name="pokemon_heigth">altura</string>
+    <string name="pokemon_weigth">peso</string>
+    <string name="switch_text_on">capturado</string>
+    <string name="switch_text_off">visto</string>
 </resources>

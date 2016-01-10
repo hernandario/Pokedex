@@ -23,7 +23,7 @@ public class pokemon_species {
     public static final String KEY_has_gender_differences = "has_gender_differences";
     public static final String KEY_growth_rate_id = "growth_rate_id";
     public static final String KEY_forms_switchable = "forms_switchable";
-    public static final String KEY_order = "order";
+    public static final String KEY_order = "\"order\"";
     public static final String KEY_conquest_order = "conquest_order";
 
 

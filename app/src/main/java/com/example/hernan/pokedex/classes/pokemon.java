@@ -13,7 +13,7 @@ public class pokemon {
     public static final String KEY_height = "height";
     public static final String KEY_weight = "weight";
     public static final String KEY_base_experience = "base_experience";
-    public static final String KEY_order = "order";
+    public static final String KEY_order = "\"order\"";
     public static final String KEY_is_default = "is_default";
 
     public int id;

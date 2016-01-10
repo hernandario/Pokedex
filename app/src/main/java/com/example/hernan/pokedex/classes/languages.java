@@ -12,7 +12,7 @@ public class languages {
     public static final String KEY_iso3166 = "iso3166";
     public static final String KEY_identifier = "identifier";
     public static final String KEY_official = "official";
-    public static final String KEY_order = "order";
+    public static final String KEY_order = "\"order\"";
 
     public int id;
     public String iso639;
