@@ -2,6 +2,7 @@ package com.example.hernan.pokedex.DAOs;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.hernan.pokedex.DBHelper;
@@ -76,6 +77,30 @@ public class pokemon_pokedexDAO {
         long pp_id = db.insert(pokemon_pokedex.TABLE, null, values);
         db.close();
         return (int) pp_id;
+
+    }
+
+    public boolean isCapturado(int pokedex_id, int species_id){
+
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String selectQuery = "SELECT " +
+                pokemon_pokedex.KEY_capturado
+                + " FROM " + pokemon_pokedex.TABLE
+                + " WHERE " + pokemon_pokedex.KEY_pokedex_id + " = ? "
+                + " AND " + pokemon_pokedex.KEY_species_id + " = ? ";
+
+        Cursor cursor = db.rawQuery(selectQuery, new String[] { String.valueOf(pokedex_id), String.valueOf(species_id)});
+        boolean capturado = false;
+        if(cursor.moveToFirst()){
+            do{
+              capturado  = (cursor.getInt(cursor.getColumnIndex(pokemon_pokedex.KEY_capturado)) == 1)? true : false;
+            }
+            while(cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+
+        return capturado;
 
     }
 

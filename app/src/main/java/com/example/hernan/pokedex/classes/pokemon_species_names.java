@@ -5,7 +5,7 @@ package com.example.hernan.pokedex.classes;
  */
 public class pokemon_species_names {
 
-    public static final String TABLE = "pokemon_species_name";
+    public static final String TABLE = "pokemon_species_names";
 
     public static final String KEY_pokemon_species_id = "pokemon_species_id";
     public static final String KEY_local_language_id = "local_language_id";

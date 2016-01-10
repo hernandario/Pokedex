@@ -5,6 +5,7 @@ import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
+import android.util.Log;
 
 import com.example.hernan.pokedex.classes.evolution_chains;
 import com.example.hernan.pokedex.classes.generations;
@@ -25,18 +26,25 @@ import com.example.hernan.pokedex.classes.usuario_pokedex;
 import com.example.hernan.pokedex.classes.version_groups;
 import com.example.hernan.pokedex.classes.versions;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 /**
  * Created by Hernan on 14/12/15.
  */
 public class DBHelper extends SQLiteOpenHelper {
 
 
-    private static final int DATABASE_VERSION = 1;
+    private Context context;
+    private static final int DATABASE_VERSION = 4;
     private static final String DATABASE_NAME = "pokedex.db";
 
     public DBHelper(Context context) {
 
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.context = context;
     }
 
 
@@ -53,6 +61,27 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
+        db.execSQL("DROP TABLE IF EXISTS " + evolution_chains.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + generations.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + languages.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + notas.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + pokedex.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + pokemon.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + pokemon_colors.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + pokemon_pokedex.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + pokemon_species.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + pokemon_species_flavor_text.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + pokemon_species_names.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + regions.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + types.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + types_names.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + usuario.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + usuario_pokedex.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + version_groups.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + versions.TABLE);
+
+        // Create tables again
+        onCreate(db);
     }
 
     public void createTables(SQLiteDatabase db){
@@ -248,6 +277,71 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public void insertOnTables(SQLiteDatabase db){
+
+        InputStream insertStream = context.getResources().openRawResource(R.raw.evolution_chains);
+        executeInserts(db, insertStream);
+
+        insertStream = context.getResources().openRawResource(R.raw.generations);
+        executeInserts(db, insertStream);
+
+        insertStream = context.getResources().openRawResource(R.raw.languages);
+        executeInserts(db, insertStream);
+
+        insertStream = context.getResources().openRawResource(R.raw.pokemon);
+        executeInserts(db, insertStream);
+
+        insertStream = context.getResources().openRawResource(R.raw.pokemon_colors);
+        executeInserts(db, insertStream);
+
+        insertStream = context.getResources().openRawResource(R.raw.pokemon_species);
+        executeInserts(db, insertStream);
+
+        //insertStream = context.getResources().openRawResource(R.raw.pokemon_species_flavor_text);
+        //executeInserts(db, insertStream);
+
+        insertStream = context.getResources().openRawResource(R.raw.pokemon_species_names);
+        executeInserts(db, insertStream);
+
+        insertStream = context.getResources().openRawResource(R.raw.regions);
+        executeInserts(db, insertStream);
+
+        insertStream = context.getResources().openRawResource(R.raw.type_names);
+        executeInserts(db, insertStream);
+
+        insertStream = context.getResources().openRawResource(R.raw.types);
+        executeInserts(db, insertStream);
+
+        insertStream = context.getResources().openRawResource(R.raw.version_groups);
+        executeInserts(db, insertStream);
+
+        insertStream = context.getResources().openRawResource(R.raw.versions);
+        executeInserts(db, insertStream);
+
+    }
+
+    public void executeInserts(SQLiteDatabase db, InputStream insertStream){
+
+        int rowCount = 0;
+
+        BufferedReader insertReader = new BufferedReader( new InputStreamReader(insertStream));
+
+        try {
+            while(insertReader.ready()){
+
+                String insertStatement = insertReader.readLine();
+                db.execSQL(insertStatement);
+
+                rowCount ++;
+
+            }
+
+            insertReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        Log.i("Filas insertadas: " , String.valueOf(rowCount));
 
     }
 
