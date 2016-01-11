@@ -63,9 +63,6 @@ public class pokemon_adapter extends ArrayAdapter<pokemon> {
 
         int recursoImagen = this.getContext().getResources().getIdentifier("pokemon_" + (super.getItem(position).id), "drawable", "com.example.hernan.pokedex" );
 
-        Log.i("ID =", String.valueOf(super.getItem(position).id));
-        Log.i("Recurso imagen = ", String.valueOf(recursoImagen));
-
         if(recursoImagen != 0)
             holder.imgPokemon.setImageResource(recursoImagen);
 

@@ -341,8 +341,6 @@ public class DBHelper extends SQLiteOpenHelper {
         }
 
 
-        Log.i("Filas insertadas: " , String.valueOf(rowCount));
-
     }
 
 }
