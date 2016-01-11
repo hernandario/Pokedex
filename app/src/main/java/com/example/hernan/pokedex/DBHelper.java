@@ -38,7 +38,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     private Context context;
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 5;
     private static final String DATABASE_NAME = "pokedex.db";
 
     public DBHelper(Context context) {

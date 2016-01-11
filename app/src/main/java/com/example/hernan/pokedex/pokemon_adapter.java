@@ -2,6 +2,7 @@ package com.example.hernan.pokedex;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +53,8 @@ public class pokemon_adapter extends ArrayAdapter<pokemon> {
             holder.tvPeso = (TextView) item.findViewById(R.id.tvPeso);
             holder.btnswitchEstado = (Switch) item.findViewById(R.id.btnswitchEstado);
 
+            item.setTag(holder);
+
         }
 
         else{
@@ -59,6 +62,9 @@ public class pokemon_adapter extends ArrayAdapter<pokemon> {
         }
 
         int recursoImagen = this.getContext().getResources().getIdentifier("pokemon_" + (super.getItem(position).id), "drawable", "com.example.hernan.pokedex" );
+
+        Log.i("ID =", String.valueOf(super.getItem(position).id));
+        Log.i("Recurso imagen = ", String.valueOf(recursoImagen));
 
         if(recursoImagen != 0)
             holder.imgPokemon.setImageResource(recursoImagen);
@@ -68,10 +74,11 @@ public class pokemon_adapter extends ArrayAdapter<pokemon> {
 
 
         holder.tvPokemonName.setText(super.getItem(position).identifier);
-        holder.tvAltura.setText(super.getItem(position).height);
-        holder.tvPeso.setText(super.getItem(position).weight);
+        holder.tvAltura.setText(String.valueOf(super.getItem(position).height));
+        holder.tvPeso.setText(String.valueOf(super.getItem(position).weight));
 
 
+        /*
         int pokedex_id = Integer.parseInt(user_preferences.getString("pokedex_id", "0"));
         pokemon_pokedexDAO ppDAO = new pokemon_pokedexDAO(super.getContext());
 
@@ -80,7 +87,7 @@ public class pokemon_adapter extends ArrayAdapter<pokemon> {
 
         else
             holder.btnswitchEstado.setChecked(false);
-
+*/
 
         return item;
 

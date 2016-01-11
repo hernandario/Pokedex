@@ -31,7 +31,7 @@ public class pokemonDAO {
                 + pokemon.KEY_base_experience + ", "
                 + pokemon.KEY_order
                 + " FROM " + pokemon.TABLE
-                + " WHERE " + " = ?";
+                + " WHERE " + pokemon.KEY_id + " = ?;";
 
         pokemon poke = new pokemon();
 
