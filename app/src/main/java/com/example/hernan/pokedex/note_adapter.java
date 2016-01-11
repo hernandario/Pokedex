@@ -48,7 +48,7 @@ public class note_adapter extends RecyclerView.Adapter<note_adapter.notesViewHol
 
     @Override
     public int getItemCount() {
-        
+
         return lista_notas.size();
     }
 

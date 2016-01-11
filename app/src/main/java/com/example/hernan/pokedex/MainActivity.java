@@ -7,8 +7,10 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.ListView;
 
+import com.example.hernan.pokedex.DAOs.notasDAO;
 import com.example.hernan.pokedex.DAOs.pokemonDAO;
 import com.example.hernan.pokedex.DAOs.pokemon_speciesDAO;
+import com.example.hernan.pokedex.classes.notas;
 import com.example.hernan.pokedex.classes.pokemon;
 import com.example.hernan.pokedex.classes.pokemon_species;
 
@@ -21,22 +23,21 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.pokemon_list_layout);
+        setContentView(R.layout.notes_list_layout);
 
-        pokemonDAO pokeDao = new pokemonDAO(this);
+        notasDAO pokeDao = new notasDAO(this);
 
-        ArrayList<pokemon> pokemons = new ArrayList<pokemon>();
+        ArrayList<notas> pokemons = new ArrayList<notas>();
 
         for(int i = 1; i <= 151; i++){
-            pokemon p = pokeDao.getPokemonById(i);
-            pokemons.add(p);
-            Log.i("pokemon agregado= ", p.identifier);
-            Log.i("pokemon id= ", String.valueOf(p.id));
+            notas n = new notas();
+            n.texto = "Hola " + i;
+            pokemons.add(n);
         }
 
-        lvPokedex = (RecyclerView) findViewById(R.id.lvPokedex);
+        lvPokedex = (RecyclerView) findViewById(R.id.lvNotas);
 
-        pokemon_adapter adapter = new pokemon_adapter(pokemons);
+        note_adapter adapter = new note_adapter(pokemons);
 
         lvPokedex.setAdapter(adapter);
         lvPokedex.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
