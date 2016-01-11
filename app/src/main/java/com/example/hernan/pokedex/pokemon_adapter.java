@@ -2,6 +2,7 @@ package com.example.hernan.pokedex;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,81 +23,92 @@ import java.util.ArrayList;
 /**
  * Created by Hernan on 10/1/16.
  */
-public class pokemon_adapter extends ArrayAdapter<pokemon> {
+public class pokemon_adapter extends RecyclerView.Adapter<pokemon_adapter.pokemonViewHolder>{
 
 
-    SharedPreferences user_preferences;
+    private ArrayList<pokemon> pokemons;
+    static SharedPreferences user_preferences;
 
-    public pokemon_adapter(Context context, ArrayList<pokemon> pokemons){
-        super(context, R.layout.pokemon_view_layout, pokemons);
+    public pokemon_adapter(ArrayList<pokemon> pokemons){
 
-        user_preferences = context.getSharedPreferences("user_preferences", Context.MODE_PRIVATE);
+        this.pokemons = pokemons;
+
+
     }
 
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public pokemonViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        pokemonViewHolder pvh;
 
-        View item = convertView;
-        ViewHolder holder;
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.pokemon_view_layout, parent, false);
 
-        if( item == null){
+        pvh = new pokemonViewHolder(itemView);
 
-            LayoutInflater inflador = LayoutInflater.from(getContext());
-            item = inflador.inflate(R.layout.pokemon_view_layout, null);
+        return pvh;
+    }
 
-            holder = new ViewHolder();
+    @Override
+    public void onBindViewHolder(pokemonViewHolder holder, int position) {
 
-            holder.imgPokemon = (ImageView) item.findViewById(R.id.imgPokemon);
-            holder.tvPokemonName = (TextView) item.findViewById(R.id.tvPokemonName);
-            holder.tvAltura = (TextView) item.findViewById(R.id.tvAltura);
-            holder.tvPeso = (TextView) item.findViewById(R.id.tvPeso);
-            holder.btnswitchEstado = (Switch) item.findViewById(R.id.btnswitchEstado);
+        pokemon p = pokemons.get(position);
 
-            item.setTag(holder);
+        holder.bindPokemon(p);
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return pokemons.size();
+    }
+
+    static class pokemonViewHolder extends RecyclerView.ViewHolder{
+
+        private ImageView imgPokemon;
+        private TextView tvPokemonName, tvAltura, tvPeso;
+        private Switch btnswitchEstado;
+
+        public pokemonViewHolder(View itemView) {
+            super(itemView);
+
+            user_preferences = itemView.getContext().getSharedPreferences("user_preferences", Context.MODE_PRIVATE);
+
+            imgPokemon = (ImageView) itemView.findViewById(R.id.imgPokemon);
+            tvPokemonName = (TextView) itemView.findViewById(R.id.tvPokemonName);
+            tvAltura = (TextView) itemView.findViewById(R.id.tvAltura);
+            tvPeso = (TextView) itemView.findViewById(R.id.tvPeso);
+            btnswitchEstado = (Switch) itemView.findViewById(R.id.btnswitchEstado);
 
         }
 
-        else{
-            holder = (ViewHolder) item.getTag();
-        }
+        public void bindPokemon(pokemon p){
 
-        int recursoImagen = this.getContext().getResources().getIdentifier("pokemon_" + (super.getItem(position).id), "drawable", "com.example.hernan.pokedex" );
+            int recursoImagen = itemView.getContext().getResources().getIdentifier("pokemon_" + (p.id), "drawable", "com.example.hernan.pokedex" );
 
-        if(recursoImagen != 0)
-            holder.imgPokemon.setImageResource(recursoImagen);
+            if(recursoImagen != 0)
+                imgPokemon.setImageResource(recursoImagen);
 
-        else
-            holder.imgPokemon.setImageResource(R.drawable.pokemon_0);
+            else
+                imgPokemon.setImageResource(R.drawable.pokemon_0);
 
 
-        holder.tvPokemonName.setText(super.getItem(position).identifier);
-        holder.tvAltura.setText(String.valueOf(super.getItem(position).height));
-        holder.tvPeso.setText(String.valueOf(super.getItem(position).weight));
+            tvPokemonName.setText(p.identifier);
+            tvAltura.setText(String.valueOf(p.height));
+            tvPeso.setText(String.valueOf(p.weight));
 
 
         /*
         int pokedex_id = Integer.parseInt(user_preferences.getString("pokedex_id", "0"));
-        pokemon_pokedexDAO ppDAO = new pokemon_pokedexDAO(super.getContext());
+        pokemon_pokedexDAO ppDAO = new pokemon_pokedexDAO(itemView.getContext());
 
-        if(ppDAO.isCapturado(pokedex_id, super.getItem(position).species_id))
-            holder.btnswitchEstado.setChecked(true);
+        if(ppDAO.isCapturado(pokedex_id, p.species_id))
+            btnswitchEstado.setChecked(true);
 
         else
-            holder.btnswitchEstado.setChecked(false);
+            btnswitchEstado.setChecked(false);
 */
 
-        return item;
 
-
-    }
-
-
-    static class ViewHolder{
-
-        ImageView imgPokemon;
-        TextView tvPokemonName, tvAltura, tvPeso;
-        Switch btnswitchEstado;
-
+        }
     }
 }

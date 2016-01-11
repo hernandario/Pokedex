@@ -2,6 +2,8 @@ package com.example.hernan.pokedex;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.ListView;
 
@@ -14,11 +16,12 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ListView lvPokedex;
+
+    private RecyclerView lvPokedex;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.pokemon_list_layout);
 
         pokemonDAO pokeDao = new pokemonDAO(this);
 
@@ -31,11 +34,12 @@ public class MainActivity extends AppCompatActivity {
             Log.i("pokemon id= ", String.valueOf(p.id));
         }
 
-        lvPokedex = (ListView) findViewById(R.id.lvPokedex);
+        lvPokedex = (RecyclerView) findViewById(R.id.lvPokedex);
 
-        pokemon_adapter adapter = new pokemon_adapter(this, pokemons);
+        pokemon_adapter adapter = new pokemon_adapter(pokemons);
 
         lvPokedex.setAdapter(adapter);
+        lvPokedex.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
     }
 }

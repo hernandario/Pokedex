@@ -1,6 +1,7 @@
 package com.example.hernan.pokedex;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,47 +16,59 @@ import java.util.ArrayList;
 /**
  * Created by Hernan on 10/1/16.
  */
-public class note_adapter extends ArrayAdapter<notas> {
+public class note_adapter extends RecyclerView.Adapter<note_adapter.notesViewHolder> {
 
-    public note_adapter(Context context, ArrayList<notas> lista_notas){
-            super(context, R.layout.pokemon_view_layout, lista_notas);
+    private ArrayList<notas> lista_notas;
 
+    public note_adapter(ArrayList<notas> lista_notas){
+            this.lista_notas=lista_notas;
+
+    }
+
+
+    @Override
+    public notesViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+        notesViewHolder nvh;
+
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.notes_view_layout, parent, false);
+
+        nvh = new notesViewHolder(itemView);
+
+        return nvh;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public void onBindViewHolder(notesViewHolder holder, int position) {
 
-        View item = convertView;
-        ViewHolder holder;
+        notas n = lista_notas.get(position);
 
-        if( item == null){
-
-            LayoutInflater inflador = LayoutInflater.from(getContext());
-            item = inflador.inflate(R.layout.notes_view_layout, null);
-
-            holder = new ViewHolder();
-
-            holder.tvNoteText = (TextView) item.findViewById(R.id.tvNoteText);
-            holder.btnEditNote = (ImageButton) item.findViewById(R.id.btnEditNote);
-            holder.btnDeleteNote = (ImageButton) item.findViewById(R.id.btnDeleteNote);
-
-            item.setTag(holder);
-
-        }
-
-        else
-            holder = (ViewHolder) item.getTag();
-
-        holder.tvNoteText.setText(super.getItem(position).texto);
-
-        return item;
+        holder.bindNote(n);
     }
 
+    @Override
+    public int getItemCount() {
+        
+        return lista_notas.size();
+    }
 
-    static class ViewHolder{
+    static class notesViewHolder extends  RecyclerView.ViewHolder{
 
-        TextView tvNoteText;
-        ImageButton btnEditNote, btnDeleteNote;
+        private TextView tvNoteText;
+        private ImageButton btnEditNote, btnDeleteNote;
 
+        public notesViewHolder(View itemView) {
+            super(itemView);
+
+            tvNoteText = (TextView) itemView.findViewById(R.id.tvNoteText);
+            btnEditNote = (ImageButton) itemView.findViewById(R.id.btnEditNote);
+            btnDeleteNote = (ImageButton) itemView.findViewById(R.id.btnDeleteNote);
+        }
+
+        public void bindNote(notas n){
+
+            tvNoteText.setText(n.texto);
+
+        }
     }
 }
