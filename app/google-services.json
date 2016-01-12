@@ -1,0 +1,51 @@
+{
+  "project_info": {
+    "project_id": "pokedex-1187",
+    "project_number": "723521614061",
+    "name": "pokedex"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:723521614061:android:4d0c717c7a8f9a8e",
+        "client_id": "android:com.example.hernan.pokedex",
+        "client_type": 1,
+        "android_client_info": {
+          "package_name": "com.example.hernan.pokedex"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "723521614061-0uqajc0bsrcr1l5u39jejsv5730kc2b2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hernan.pokedex",
+            "certificate_hash": "A87425848F42A5E848BD07C4275E36425944D4EC"
+          }
+        }
+      ],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "cloud_messaging_service": {
+          "status": 1,
+          "apns_config": []
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "google_signin_service": {
+          "status": 2
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "client_info": [],
+  "ARTIFACT_VERSION": "1"
+}
