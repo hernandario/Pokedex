@@ -130,15 +130,8 @@
             android:layout_height="wrap_content"
             android:paddingRight="8dp"
             android:textSize="10sp"
-            android:text="@string/switch_text_off"
             />
 
-        <Switch
-            android:id="@+id/btnswitchEstado"
-            android:textOn="@string/switch_text_on"
-            android:textOff="@string/switch_text_off"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
 
 
     </LinearLayout>

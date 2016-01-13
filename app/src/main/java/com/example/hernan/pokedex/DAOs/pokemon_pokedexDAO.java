@@ -41,7 +41,10 @@ public class pokemon_pokedexDAO {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
 
+        values.put(pokemon_pokedex.KEY_species_id, pp.species_id);
+        values.put(pokemon_pokedex.KEY_pokedex_id, pp.pokedex_id);
         values.put(pokemon_pokedex.KEY_capturado, true);
+        values.put(pokemon_pokedex.KEY_visto, true);
 
         db.update(pokemon_pokedex.TABLE, values, pokemon_pokedex.KEY_pokedex_id + " = ?"
                         + " AND " + pokemon_pokedex.KEY_species_id + " = ?",
@@ -89,8 +92,10 @@ public class pokemon_pokedexDAO {
                 + " WHERE " + pokemon_pokedex.KEY_pokedex_id + " = ? "
                 + " AND " + pokemon_pokedex.KEY_species_id + " = ? ";
 
+
         Cursor cursor = db.rawQuery(selectQuery, new String[] { String.valueOf(pokedex_id), String.valueOf(species_id)});
         boolean capturado = false;
+
         if(cursor.moveToFirst()){
             do{
               capturado  = (cursor.getInt(cursor.getColumnIndex(pokemon_pokedex.KEY_capturado)) == 1)? true : false;

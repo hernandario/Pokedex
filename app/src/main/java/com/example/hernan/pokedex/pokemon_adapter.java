@@ -18,6 +18,7 @@ import com.example.hernan.pokedex.classes.pokemon;
 import com.example.hernan.pokedex.classes.pokemon_pokedex;
 import com.example.hernan.pokedex.DAOs.pokemon_pokedexDAO;
 import com.example.hernan.pokedex.classes.pokemon_species;
+import com.example.hernan.pokedex.classes.usuario;
 
 import java.util.ArrayList;
 
@@ -29,11 +30,13 @@ public class pokemon_adapter extends RecyclerView.Adapter<pokemon_adapter.pokemo
 
     private View.OnClickListener listener;
     private ArrayList<pokemon> pokemons;
-    static SharedPreferences user_preferences;
+    private static SharedPreferences user_preferences;
+    private static usuario u;
 
-    public pokemon_adapter(ArrayList<pokemon> pokemons){
+    public pokemon_adapter(ArrayList<pokemon> pokemons, usuario u){
 
         this.pokemons = pokemons;
+        this.u = u;
 
 
     }
@@ -81,8 +84,8 @@ public class pokemon_adapter extends RecyclerView.Adapter<pokemon_adapter.pokemo
     public static class pokemonViewHolder extends RecyclerView.ViewHolder  {
 
         private ImageView imgPokemon;
-        private TextView tvPokemonName, tvAltura, tvPeso;
-        private Switch btnswitchEstado;
+        private TextView tvPokemonName, tvAltura, tvPeso, tvEstado;
+
 
         public pokemonViewHolder(View itemView)  {
             super(itemView);
@@ -93,7 +96,7 @@ public class pokemon_adapter extends RecyclerView.Adapter<pokemon_adapter.pokemo
             tvPokemonName = (TextView) itemView.findViewById(R.id.tvPokemonName);
             tvAltura = (TextView) itemView.findViewById(R.id.tvAltura);
             tvPeso = (TextView) itemView.findViewById(R.id.tvPeso);
-            btnswitchEstado = (Switch) itemView.findViewById(R.id.btnswitchEstado);
+            tvEstado = (TextView) itemView.findViewById(R.id.tvEstadoLabel);
 
         }
 
@@ -112,17 +115,14 @@ public class pokemon_adapter extends RecyclerView.Adapter<pokemon_adapter.pokemo
             tvAltura.setText(String.valueOf(p.height));
             tvPeso.setText(String.valueOf(p.weight));
 
-
-        /*
-        int pokedex_id = Integer.parseInt(user_preferences.getString("pokedex_id", "0"));
         pokemon_pokedexDAO ppDAO = new pokemon_pokedexDAO(itemView.getContext());
 
-        if(ppDAO.isCapturado(pokedex_id, p.species_id))
-            btnswitchEstado.setChecked(true);
+        if(ppDAO.isCapturado(u.id, p.species_id))
+            tvEstado.setText(R.string.switch_text_on);
 
         else
-            btnswitchEstado.setChecked(false);
-*/
+            tvEstado.setText(R.string.switch_text_off);
+
 
 
         }
