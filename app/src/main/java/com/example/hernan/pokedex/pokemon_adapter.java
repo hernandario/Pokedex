@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.example.hernan.pokedex.classes.pokemon;
@@ -23,9 +24,10 @@ import java.util.ArrayList;
 /**
  * Created by Hernan on 10/1/16.
  */
-public class pokemon_adapter extends RecyclerView.Adapter<pokemon_adapter.pokemonViewHolder>{
+public class pokemon_adapter extends RecyclerView.Adapter<pokemon_adapter.pokemonViewHolder> implements View.OnClickListener{
 
 
+    private View.OnClickListener listener;
     private ArrayList<pokemon> pokemons;
     static SharedPreferences user_preferences;
 
@@ -42,6 +44,7 @@ public class pokemon_adapter extends RecyclerView.Adapter<pokemon_adapter.pokemo
         pokemonViewHolder pvh;
 
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.pokemon_view_layout, parent, false);
+        itemView.setOnClickListener(this);
 
         pvh = new pokemonViewHolder(itemView);
 
@@ -62,13 +65,26 @@ public class pokemon_adapter extends RecyclerView.Adapter<pokemon_adapter.pokemo
         return pokemons.size();
     }
 
-    static class pokemonViewHolder extends RecyclerView.ViewHolder{
+    public void setOnClcikListener(View.OnClickListener listener){
+        this.listener = listener;
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        if(listener != null)
+            listener.onClick(v);
+
+    }
+
+
+    public static class pokemonViewHolder extends RecyclerView.ViewHolder  {
 
         private ImageView imgPokemon;
         private TextView tvPokemonName, tvAltura, tvPeso;
         private Switch btnswitchEstado;
 
-        public pokemonViewHolder(View itemView) {
+        public pokemonViewHolder(View itemView)  {
             super(itemView);
 
             user_preferences = itemView.getContext().getSharedPreferences("user_preferences", Context.MODE_PRIVATE);
@@ -110,5 +126,8 @@ public class pokemon_adapter extends RecyclerView.Adapter<pokemon_adapter.pokemo
 
 
         }
+
+
+
     }
 }

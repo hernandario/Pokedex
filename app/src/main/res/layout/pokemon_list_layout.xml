@@ -10,7 +10,7 @@
     tools:context="com.example.hernan.pokedex.MainActivity">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/lvPokedex"
+        android:id="@+id/rvPokedex"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>

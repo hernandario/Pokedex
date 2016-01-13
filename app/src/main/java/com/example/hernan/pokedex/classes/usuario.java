@@ -1,9 +1,11 @@
 package com.example.hernan.pokedex.classes;
 
+import java.io.Serializable;
+
 /**
  * Created by Hernan on 14/12/15.
  */
-public class usuario {
+public class usuario implements Serializable {
 
     public static final String TABLE = "usuario";
 

@@ -183,7 +183,7 @@ public class SignInActivity extends AppCompatActivity implements
     public void newActivity(usuario u){
 
         Intent pokedex_intent = new Intent(SignInActivity.this, PokedexActivity.class);
-        pokedex_intent.putExtra("usuario_mail", u.mail);
+        pokedex_intent.putExtra(usuario.TABLE, u);
         startActivity(pokedex_intent);
     }
 
