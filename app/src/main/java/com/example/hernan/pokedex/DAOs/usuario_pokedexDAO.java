@@ -1,5 +1,6 @@
 package com.example.hernan.pokedex.DAOs;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -17,6 +18,20 @@ public class usuario_pokedexDAO {
     public usuario_pokedexDAO(Context context){
 
         dbHelper = new DBHelper(context);
+
+    }
+
+    public void insert(int usuario_id, int pokedex_id){
+
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(usuario_pokedex.KEY_usuario_id, usuario_id);
+        values.put(usuario_pokedex.KEY_pokedex_id, pokedex_id);
+
+        long id = db.insert(usuario_pokedex.TABLE, null, values);
+
+        db.close();
 
     }
 

@@ -38,7 +38,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     private Context context;
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 6;
     private static final String DATABASE_NAME = "pokedex.db";
 
     public DBHelper(Context context) {
@@ -128,7 +128,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         String POKEDEX = "CREATE TABLE "
                 + pokedex.TABLE + "("
-                + pokedex.KEY_id + " INTEGER PRIMARY KEY AUTOINCREMENT "
+                + pokedex.KEY_id + " INTEGER PRIMARY KEY"
                 +")";
 
         db.execSQL(POKEDEX);
@@ -266,7 +266,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         String USUARIOS   = "CREATE TABLE "
                 + usuario.TABLE + "("
-                + usuario.KEY_id + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + usuario.KEY_id + " INTEGER PRIMARY KEY, "
                 + usuario.KEY_nombre + " VARCHAR(79), "
                 + usuario.KEY_mail + " VARCHAR(79), "
                 + usuario.KEY_local_language_id + " INTEGER NOT NULL"

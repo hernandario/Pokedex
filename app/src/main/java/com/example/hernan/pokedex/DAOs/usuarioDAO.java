@@ -36,7 +36,32 @@ public class usuarioDAO {
 
     }
 
-    public usuario getUsuario(String email){
+    public boolean isUsuario(int usuario_id){
+
+        boolean isUsuario = false;
+
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        String selectQuery = "SELECT "
+                + usuario.KEY_id
+                + " FROM " + usuario.TABLE
+                + " WHERE " + usuario.KEY_id + " = ?";
+
+        Cursor cursor = db.rawQuery(selectQuery, new String[] {String.valueOf(usuario_id)});
+
+        if(cursor.moveToFirst()){
+            do{
+                isUsuario = true;
+            }while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return isUsuario;
+
+    }
+
+    public usuario getUsuario(int usuario_id){
 
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -46,12 +71,12 @@ public class usuarioDAO {
                 + usuario.KEY_mail + ", "
                 + usuario.KEY_local_language_id
                 + " FROM " + usuario.TABLE
-                + " WHERE " + usuario.KEY_mail + " = ?";
+                + " WHERE " + usuario.KEY_id + " = ?";
 
         int iCount = 0;
         usuario u = new usuario();
 
-        Cursor cursor = db.rawQuery(selectQuery, new String[] {email});
+        Cursor cursor = db.rawQuery(selectQuery, new String[] {String.valueOf(usuario_id)});
 
         if(cursor.moveToFirst()){
             do{

@@ -8,6 +8,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.hernan.pokedex.DAOs.pokedexDAO;
+import com.example.hernan.pokedex.DAOs.usuarioDAO;
+import com.example.hernan.pokedex.DAOs.usuario_pokedexDAO;
+import com.example.hernan.pokedex.classes.pokedex;
+import com.example.hernan.pokedex.classes.usuario;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -119,12 +124,46 @@ public class SignInActivity extends AppCompatActivity implements
 
     // [START handleSignInResult]
     private void handleSignInResult(GoogleSignInResult result) {
+
+        usuario u = new usuario();
+        pokedex p = new pokedex();
+
+        usuarioDAO uDAO = new usuarioDAO(this);
+        pokedexDAO pDAO = new pokedexDAO(this);
+        usuario_pokedexDAO upDAO = new usuario_pokedexDAO(this);
+
         Log.d(TAG, "handleSignInResult:" + result.isSuccess());
         if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
+
+            if(uDAO.isUsuario(Integer.parseInt(acct.getId())))
+                u = uDAO.getUsuario(Integer.parseInt(acct.getId()));
+
+            else{
+
+                u.id = Integer.parseInt(acct.getId());
+                u.mail = acct.getEmail();
+                u.nombre = acct.getDisplayName();
+                u.local_language_id = 7;
+                uDAO.insert(u);
+
+                p.id = u.id;
+                pDAO.insert(p.id);
+
+                upDAO.insert(u.id,p.id);
+
+
+
+            }
+
             mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
             updateUI(true);
+
+
+
+
+
         } else {
             // Signed out, show unauthenticated UI.
             updateUI(false);
