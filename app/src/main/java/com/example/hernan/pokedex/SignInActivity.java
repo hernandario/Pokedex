@@ -34,6 +34,7 @@ public class SignInActivity extends AppCompatActivity implements
 
     private static final String TAG = "SignInActivity";
     private static final int RC_SIGN_IN = 9001;
+    private static usuario u;
 
     private GoogleApiClient mGoogleApiClient;
     private TextView mStatusTextView;
@@ -125,7 +126,7 @@ public class SignInActivity extends AppCompatActivity implements
     // [START handleSignInResult]
     private void handleSignInResult(GoogleSignInResult result) {
 
-        usuario u = new usuario();
+        u = new usuario();
         pokedex p = new pokedex();
 
         usuarioDAO uDAO = new usuarioDAO(this);
@@ -165,7 +166,7 @@ public class SignInActivity extends AppCompatActivity implements
             updateUI(true);
 
 
-            newActivity(u);
+
 
 
 
@@ -266,7 +267,7 @@ public class SignInActivity extends AppCompatActivity implements
                 signOut();
                 break;
             case R.id.disconnect_button:
-                revokeAccess();
+                newActivity(u);
                 break;
         }
     }
