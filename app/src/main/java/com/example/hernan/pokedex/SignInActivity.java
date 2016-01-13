@@ -137,12 +137,15 @@ public class SignInActivity extends AppCompatActivity implements
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
 
-            if(uDAO.isUsuario(Integer.parseInt(acct.getId())))
-                u = uDAO.getUsuario(Integer.parseInt(acct.getId()));
+            if(uDAO.isUsuario(acct.getEmail())) {
+                u = uDAO.getUsuario(acct.getEmail());
+
+                Log.e("El usuario ya existe : " , u.nombre);
+            }
 
             else{
 
-                u.id = Integer.parseInt(acct.getId());
+
                 u.mail = acct.getEmail();
                 u.nombre = acct.getDisplayName();
                 u.local_language_id = 7;
@@ -153,12 +156,17 @@ public class SignInActivity extends AppCompatActivity implements
 
                 upDAO.insert(u.id,p.id);
 
+                Log.e("suario nuevo ", u.nombre);
 
 
             }
 
             mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
             updateUI(true);
+
+
+            newActivity(u);
+
 
 
 
@@ -170,6 +178,13 @@ public class SignInActivity extends AppCompatActivity implements
         }
     }
     // [END handleSignInResult]
+
+    public void newActivity(usuario u){
+
+        Intent pokedex_intent = new Intent(SignInActivity.this, PokedexActivity.class);
+        pokedex_intent.putExtra("usuario_mail", u.mail);
+        startActivity(pokedex_intent);
+    }
 
     // [START signIn]
     private void signIn() {

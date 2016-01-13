@@ -25,7 +25,7 @@ public class usuarioDAO {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(usuario.KEY_id, u.id);
+
         values.put(usuario.KEY_nombre, u.nombre);
         values.put(usuario.KEY_mail, u.mail);
         values.put(usuario.KEY_local_language_id, u.local_language_id);
@@ -36,7 +36,7 @@ public class usuarioDAO {
 
     }
 
-    public boolean isUsuario(int usuario_id){
+    public boolean isUsuario(String usuario_mail){
 
         boolean isUsuario = false;
 
@@ -45,9 +45,9 @@ public class usuarioDAO {
         String selectQuery = "SELECT "
                 + usuario.KEY_id
                 + " FROM " + usuario.TABLE
-                + " WHERE " + usuario.KEY_id + " = ?";
+                + " WHERE " + usuario.KEY_mail + " = ?";
 
-        Cursor cursor = db.rawQuery(selectQuery, new String[] {String.valueOf(usuario_id)});
+        Cursor cursor = db.rawQuery(selectQuery, new String[] {usuario_mail});
 
         if(cursor.moveToFirst()){
             do{
@@ -61,7 +61,7 @@ public class usuarioDAO {
 
     }
 
-    public usuario getUsuario(int usuario_id){
+    public usuario getUsuario(String usuario_mail){
 
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -71,12 +71,12 @@ public class usuarioDAO {
                 + usuario.KEY_mail + ", "
                 + usuario.KEY_local_language_id
                 + " FROM " + usuario.TABLE
-                + " WHERE " + usuario.KEY_id + " = ?";
+                + " WHERE " + usuario.KEY_mail + " = ?";
 
         int iCount = 0;
         usuario u = new usuario();
 
-        Cursor cursor = db.rawQuery(selectQuery, new String[] {String.valueOf(usuario_id)});
+        Cursor cursor = db.rawQuery(selectQuery, new String[] {usuario_mail});
 
         if(cursor.moveToFirst()){
             do{
