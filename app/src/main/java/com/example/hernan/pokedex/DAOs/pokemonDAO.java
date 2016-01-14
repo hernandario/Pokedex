@@ -56,5 +56,41 @@ public class pokemonDAO {
         return poke;
     }
 
+    public pokemon getPokemonByStatus(String estado){
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String selectQuery = "SELECT "
+                + pokemon.KEY_id + ", "
+                + pokemon.KEY_identifier + ", "
+                + pokemon.KEY_species_id + ", "
+                + pokemon.KEY_height + ", "
+                + pokemon.KEY_weight + ", "
+                + pokemon.KEY_base_experience + ", "
+                + pokemon.KEY_order
+                + " FROM " + pokemon.TABLE
+                + " WHERE " + estado + " = ?;";
+
+        pokemon poke = new pokemon();
+
+        Cursor cursor = db.rawQuery(selectQuery, new String[] {estado});
+
+        if(cursor.moveToFirst()){
+            do{
+
+                poke.id = cursor.getInt(cursor.getColumnIndex(pokemon.KEY_id));
+                poke.identifier = cursor.getString(cursor.getColumnIndex(pokemon.KEY_identifier));
+                poke.species_id = cursor.getInt(cursor.getColumnIndex(pokemon.KEY_species_id));
+                poke.height = cursor.getInt(cursor.getColumnIndex(pokemon.KEY_height));
+                poke.weight = cursor.getInt(cursor.getColumnIndex(pokemon.KEY_weight));
+                poke.base_experience = cursor.getInt(cursor.getColumnIndex(pokemon.KEY_base_experience));
+                poke.order = cursor.getInt(cursor.getColumnIndex(pokemon.KEY_order));
+
+            } while(cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return poke;
+    }
+
 
 }

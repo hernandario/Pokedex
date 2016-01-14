@@ -87,8 +87,8 @@ public class PokedexActivity extends AppCompatActivity{
 
                 if (ppDAO.isCapturado(u.id, lista_pokemons.get(position).species_id)) {
                     Intent notas_intent = new Intent(PokedexActivity.this, NotesActivity.class);
-                    notas_intent.putExtra("usuario", u);
-                    notas_intent.putExtra("pokemon", lista_pokemons.get(position));
+                    notas_intent.putExtra(usuario.TABLE, u);
+                    notas_intent.putExtra(pokemon.TABLE, lista_pokemons.get(position));
                     startActivity(notas_intent);
 
                 } else {
@@ -126,6 +126,7 @@ public class PokedexActivity extends AppCompatActivity{
                 tvEstado = (TextView) findViewById(R.id.tvEstadoLabel);
                 tvEstado.setText(R.string.switch_text_on);
 
+                break;
 
         }
 

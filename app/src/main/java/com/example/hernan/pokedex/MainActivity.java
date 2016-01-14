@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
             pokemons.add(n);
         }
 
-        lvPokedex = (RecyclerView) findViewById(R.id.lvNotas);
+        lvPokedex = (RecyclerView) findViewById(R.id.rvNotas);
 
         note_adapter adapter = new note_adapter(pokemons);
 

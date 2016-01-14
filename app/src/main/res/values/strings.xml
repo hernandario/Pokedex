@@ -54,5 +54,6 @@
     <string name="server_client_id">723521614061-0uqajc0bsrcr1l5u39jejsv5730kc2b2.apps.googleusercontent.com</string>
 
     <string name="capturar">Marcar como capturado</string>
+    <string name="borrar">Borrar esta nota</string>
     <string name="notas">Ir a las notas</string>
 </resources>

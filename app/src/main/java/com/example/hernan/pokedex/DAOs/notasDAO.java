@@ -27,7 +27,7 @@ public class notasDAO {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(notas.KEY_id, nota.id);
+
         values.put(notas.KEY_species_id, nota.species_id);
         values.put(notas.KEY_usuario_id, nota.usuario_id);
         values.put(notas.KEY_texto, nota.texto);
